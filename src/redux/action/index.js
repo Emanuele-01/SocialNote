@@ -1,2 +1,3 @@
 
 export const TOKEN_QUERY = 'TOKEN_QUERY';
+export const PRIVATE_PROFILE = 'PRIVATE_PROFILE';

@@ -3,6 +3,7 @@ import tokenRedux from "../reducer/tokenRedux";
 import { persistReducer, persistStore } from 'redux-persist';
 import { encryptTransform } from "redux-persist-transform-encrypt";
 import storage from 'redux-persist/lib/storage';
+import privateProfileRedux from "../reducer/privateProfileRedux";
 
 const persistConfig = {
     key: 'root',
@@ -14,7 +15,8 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
 
-    token : tokenRedux
+    token: tokenRedux,
+    profile: privateProfileRedux
 
 });
 
