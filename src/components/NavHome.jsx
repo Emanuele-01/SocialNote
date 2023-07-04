@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, Col, Container, Dropdown, Form, Modal, Nav, Navbar } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { PRIVATE_PROFILE } from "../redux/action";
+import { PRIVATE_PROFILE, getRegister } from "../redux/action";
 
 const NavHome = () => {
 
@@ -27,8 +27,8 @@ const NavHome = () => {
     const [dayOfHiding, setDayOfHiding] = useState('')
 
 
-    const baseEndpiontLogin = 'http://localhost:3001/auth/login'
-    const baseEndpiontRegister = 'http://localhost:3001/auth/register'
+    const baseEndpointLogin = 'http://localhost:3001/auth/login';
+    const baseEndpointRegister = 'http://localhost:3001/auth/register';
 
     const dataSendLogin = {
         email: email,
@@ -40,56 +40,62 @@ const NavHome = () => {
         lastName: lastName,
         username: username,
         email: email,
+        password: password,
         imageProfile: imageProfile,
         age: age,
         dayOfHiding: dayOfHiding
     }
-
-    const getLogin = async () => {
-        try {
-            const option = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkVtYW51ZWxlIFBpdG9uaSIsImlhdCI6MTUxNjIzOTAyMn0.ywBYEeT3Pm9ikR0tWtSlhDBnsTWKIRCn8V_7ww8eg9o'
-                },
-                body: JSON.stringify(dataSendLogin)
+    /*
+        const getLogin = async () => {
+            try {
+                const option = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkVtYW51ZWxlIFBpdG9uaSIsImlhdCI6MTUxNjIzOTAyMn0.ywBYEeT3Pm9ikR0tWtSlhDBnsTWKIRCn8V_7ww8eg9o'
+                    },
+                    body: JSON.stringify(dataSendLogin)
+                }
+    
+                const response = await fetch(baseEndpointLogin, option);
+    
+                if (response.ok) {
+                    const data = await response.json()
+                    dispatch({ type: PRIVATE_PROFILE, payload: data })
+                    setSingOut(true)
+                }
+            } catch (error) {
+                console.log('error: ' + error)
             }
-
-            const response = await fetch(baseEndpiontLogin, option);
-
-            if (response.ok) {
-                const data = await response.json()
-                dispatch({ type: PRIVATE_PROFILE, paylaod: data })
-                setSingOut(true)
-            }
-        } catch (error) {
-            console.log('error: ' + error)
         }
+    */
+    const handleRegister = async (event) => {
+        event.preventDefault();
+        dispatch(getRegister(dataSendRegister, singOut))
     }
 
+    /*   
     const getRegister = async () => {
-        try {
-            const option = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkVtYW51ZWxlIFBpdG9uaSIsImlhdCI6MTUxNjIzOTAyMn0.ywBYEeT3Pm9ikR0tWtSlhDBnsTWKIRCn8V_7ww8eg9o'
-                },
-                body: JSON.stringify(dataSendRegister)
-            }
-
-            const response = await fetch(baseEndpiontRegister, option);
-
-            if (response.ok) {
+            try {
+                const response = await fetch('http://localhost:3001/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkVtYW51ZWxlIFBpdG9uaSIsImlhdCI6MTUxNjIzOTAyMn0.ywBYEeT3Pm9ikR0tWtSlhDBnsTWKIRCn8V_7ww8eg9o'
+                    },
+                    body: JSON.stringify(dataSendRegister)
+                });
                 const data = await response.json()
-                dispatch({ type: PRIVATE_PROFILE, paylaod: data })
+    
+                if (response.ok) {
+                    dispatch({ type: PRIVATE_PROFILE, payload: data })
+                    setSingOut(true)
+                }
+            } catch (error) {
+                console.log('error: ' + error)
             }
-        } catch (error) {
-            console.log('error: ' + error)
         }
-    }
-
+    */
     return (
         <Navbar collapseOnSelect expand="md" className="bg-body-tertiary">
             <Container>
@@ -119,7 +125,7 @@ const NavHome = () => {
                                                 <Modal.Title className="fs-5">Login</Modal.Title>
                                             </Modal.Header>
                                             <Modal.Body>
-                                                <Form onSubmit={getLogin}>
+                                                <Form>
                                                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                                         <Form.Label className="fs-6">Email address</Form.Label>
                                                         <Form.Control
@@ -171,7 +177,7 @@ const NavHome = () => {
                                                     <Modal.Title className="fs-5">Register</Modal.Title>
                                                 </Modal.Header>
                                                 <Modal.Body>
-                                                    <Form onSubmit={getRegister}>
+                                                    <Form onSubmit={handleRegister}>
                                                         <Form.Group className="mb-1" controlId="exampleForm.ControlInput1">
                                                             <Form.Label className="fs-6">Name</Form.Label>
                                                             <Form.Control
@@ -179,6 +185,7 @@ const NavHome = () => {
                                                                 placeholder="NAME"
                                                                 autoFocus
                                                                 onChange={e => { setName(e.target.value) }}
+                                                                value={dataSendRegister.name}
                                                                 size="sm"
                                                             />
                                                             <Form.Label className="fs-6">Lastname</Form.Label>
@@ -187,6 +194,7 @@ const NavHome = () => {
                                                                 placeholder="LASTNAME"
                                                                 autoFocus
                                                                 onChange={e => { setLastName(e.target.value) }}
+                                                                value={dataSendRegister.lastName}
                                                                 size="sm"
                                                             />
                                                             <Form.Label className="fs-6">Username</Form.Label>
@@ -195,6 +203,7 @@ const NavHome = () => {
                                                                 placeholder="USERNAME"
                                                                 autoFocus
                                                                 onChange={e => { setUsername(e.target.value) }}
+                                                                value={dataSendRegister.username}
                                                                 size="sm"
                                                             />
                                                             <Form.Label className="fs-6">Email address</Form.Label>
@@ -203,14 +212,16 @@ const NavHome = () => {
                                                                 placeholder="name@example.com"
                                                                 autoFocus
                                                                 onChange={e => { setEmail(e.target.value) }}
+                                                                value={dataSendRegister.email}
                                                                 size="sm"
                                                             />
                                                             <Form.Label className="fs-6">Password</Form.Label>
                                                             <Form.Control
                                                                 type="password"
-                                                                placeholder="*****************"
+                                                                placeholder="your password"
                                                                 autoFocus
                                                                 onChange={e => { setPassword(e.target.value) }}
+                                                                value={dataSendRegister.password}
                                                                 size="sm"
                                                             />
                                                         </Form.Group>
@@ -220,6 +231,7 @@ const NavHome = () => {
                                                                 type="file"
                                                                 onChange={e => { setImageProfile(e.target.value) }}
                                                                 size="sm"
+                                                                value={dataSendRegister.imageProfile}
                                                             />
                                                         </Form.Group>
                                                         <Form.Label className="fs-6">Age</Form.Label>
@@ -228,6 +240,7 @@ const NavHome = () => {
                                                             placeholder="Your Age"
                                                             autoFocus
                                                             onChange={e => { setAge(e.target.value) }}
+                                                            value={dataSendRegister.age}
                                                             size="sm"
                                                         />
                                                         <Form.Label className="fs-6">Age</Form.Label>
@@ -235,6 +248,7 @@ const NavHome = () => {
                                                             type="date"
                                                             placeholder="Your Age"
                                                             autoFocus
+                                                            value={dataSendRegister.dayOfHiding}
                                                             onChange={e => { setDayOfHiding(e.target.value) }}
                                                             size="sm"
                                                         />
