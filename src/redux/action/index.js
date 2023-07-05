@@ -28,3 +28,28 @@ export const getRegister = (dataSendRegister, setSingOut) => {
         }
     }
 }
+
+export const getLogin = (dataSendLogin, setSingOut) => {
+    return async (dispatch) => {
+        try {
+            const response = await fetch('http://localhost:3001/auth/login', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify(dataSendLogin),
+            });
+            const data = await response.json()
+                console.log(dataSendLogin);
+                console.log(data);
+            if (response.ok) {
+              //  dispatch({ type: PRIVATE_PROFILE, payload: data })
+              //  setSingOut(true)
+                console.log('login effetuata con successo')
+            }
+        } catch (error) {
+            console.log('error: ' + error)
+        }
+    }
+}

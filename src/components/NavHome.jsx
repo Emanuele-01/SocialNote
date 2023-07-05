@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Button, Col, Container, Dropdown, Form, Modal, Nav, Navbar } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { PRIVATE_PROFILE, getRegister } from "../redux/action";
+import { getLogin, getRegister } from "../redux/action";
 
 const NavHome = () => {
 
     const dispatch = useDispatch();
-    const [singOut, setSingOut] = useState(false);
+    const [signOut, setSignOut] = useState(false);
 
 
     const [showLogin, setShowLogin] = useState(false);
@@ -24,11 +24,8 @@ const NavHome = () => {
     const [password, setPassword] = useState('')
     const [imageProfile, setImageProfile] = useState('')
     const [age, setAge] = useState('')
-    const [dayOfHiding, setDayOfHiding] = useState('')
+    const [dayOfBirth, setDayOfBirth] = useState('')
 
-
-    const baseEndpointLogin = 'http://localhost:3001/auth/login';
-    const baseEndpointRegister = 'http://localhost:3001/auth/register';
 
     const dataSendLogin = {
         email: email,
@@ -43,59 +40,18 @@ const NavHome = () => {
         password: password,
         imageProfile: imageProfile,
         age: age,
-        dayOfHiding: dayOfHiding
-    }
-    /*
-        const getLogin = async () => {
-            try {
-                const option = {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkVtYW51ZWxlIFBpdG9uaSIsImlhdCI6MTUxNjIzOTAyMn0.ywBYEeT3Pm9ikR0tWtSlhDBnsTWKIRCn8V_7ww8eg9o'
-                    },
-                    body: JSON.stringify(dataSendLogin)
-                }
-    
-                const response = await fetch(baseEndpointLogin, option);
-    
-                if (response.ok) {
-                    const data = await response.json()
-                    dispatch({ type: PRIVATE_PROFILE, payload: data })
-                    setSingOut(true)
-                }
-            } catch (error) {
-                console.log('error: ' + error)
-            }
-        }
-    */
-    const handleRegister = async (event) => {
-        event.preventDefault();
-        dispatch(getRegister(dataSendRegister, singOut))
+        dayOfHiding: dayOfBirth
     }
 
-    /*   
-    const getRegister = async () => {
-            try {
-                const response = await fetch('http://localhost:3001/auth/register', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkVtYW51ZWxlIFBpdG9uaSIsImlhdCI6MTUxNjIzOTAyMn0.ywBYEeT3Pm9ikR0tWtSlhDBnsTWKIRCn8V_7ww8eg9o'
-                    },
-                    body: JSON.stringify(dataSendRegister)
-                });
-                const data = await response.json()
-    
-                if (response.ok) {
-                    dispatch({ type: PRIVATE_PROFILE, payload: data })
-                    setSingOut(true)
-                }
-            } catch (error) {
-                console.log('error: ' + error)
-            }
-        }
-    */
+    const handleRegister = async (event) => {
+        event.preventDefault();
+        dispatch(getRegister(dataSendRegister, setSignOut))
+    }
+
+    const handleLogin = async (event) => {
+        event.preventDefault();
+        dispatch(getLogin(dataSendLogin, setSignOut))
+    }
     return (
         <Navbar collapseOnSelect expand="md" className="bg-body-tertiary">
             <Container>
@@ -110,7 +66,7 @@ const NavHome = () => {
                                 </svg>
                             </Dropdown.Toggle>
                             <Dropdown.Menu>
-                                {singOut === true ? (
+                                {signOut === true ? (
                                     <Button variant="dangerous p-0 mt-1 mb-1 ms-2" onClick={() => { window.location.reload() }}>
                                         Sing Out
                                     </Button>
@@ -125,21 +81,23 @@ const NavHome = () => {
                                                 <Modal.Title className="fs-5">Login</Modal.Title>
                                             </Modal.Header>
                                             <Modal.Body>
-                                                <Form>
+                                                <Form onSubmit={handleLogin}>
                                                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                                         <Form.Label className="fs-6">Email address</Form.Label>
                                                         <Form.Control
                                                             type="email"
                                                             placeholder="name@example.com"
                                                             autoFocus
+                                                            value={dataSendLogin.email}
                                                             onChange={e => { setEmail(e.target.value) }}
                                                             size="sm"
                                                         />
                                                         <Form.Label className="fs-6">Password</Form.Label>
                                                         <Form.Control
                                                             type="password"
-                                                            placeholder="***********"
+                                                            placeholder="your password"
                                                             autoFocus
+                                                            value={dataSendLogin.password}
                                                             onChange={e => { setPassword(e.target.value) }}
                                                             size="sm"
                                                         />
@@ -150,7 +108,7 @@ const NavHome = () => {
                                                                 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
                                                             </svg>
                                                         </Button>
-                                                        <Button variant="primary" type="submit">
+                                                        <Button variant="primary" type="submit" onClick={handleCloseLogin}>
                                                             Login
                                                         </Button>
                                                     </Modal.Footer>
@@ -162,7 +120,7 @@ const NavHome = () => {
                                 }
 
                                 {
-                                    singOut === true ? (
+                                    signOut === true ? (
                                         <div>
 
                                         </div>
@@ -182,7 +140,7 @@ const NavHome = () => {
                                                             <Form.Label className="fs-6">Name</Form.Label>
                                                             <Form.Control
                                                                 type="text"
-                                                                placeholder="NAME"
+                                                                placeholder="your name"
                                                                 autoFocus
                                                                 onChange={e => { setName(e.target.value) }}
                                                                 value={dataSendRegister.name}
@@ -191,7 +149,7 @@ const NavHome = () => {
                                                             <Form.Label className="fs-6">Lastname</Form.Label>
                                                             <Form.Control
                                                                 type="text"
-                                                                placeholder="LASTNAME"
+                                                                placeholder="your lastname"
                                                                 autoFocus
                                                                 onChange={e => { setLastName(e.target.value) }}
                                                                 value={dataSendRegister.lastName}
@@ -200,7 +158,7 @@ const NavHome = () => {
                                                             <Form.Label className="fs-6">Username</Form.Label>
                                                             <Form.Control
                                                                 type="text"
-                                                                placeholder="USERNAME"
+                                                                placeholder="your username"
                                                                 autoFocus
                                                                 onChange={e => { setUsername(e.target.value) }}
                                                                 value={dataSendRegister.username}
@@ -229,6 +187,7 @@ const NavHome = () => {
                                                             <Form.Label className="fs-6">Your image Profile</Form.Label>
                                                             <Form.Control
                                                                 type="file"
+                                                                placeholder="your image profile"
                                                                 onChange={e => { setImageProfile(e.target.value) }}
                                                                 size="sm"
                                                                 value={dataSendRegister.imageProfile}
@@ -249,7 +208,7 @@ const NavHome = () => {
                                                             placeholder="Your Age"
                                                             autoFocus
                                                             value={dataSendRegister.dayOfHiding}
-                                                            onChange={e => { setDayOfHiding(e.target.value) }}
+                                                            onChange={e => { setDayOfBirth(e.target.value) }}
                                                             size="sm"
                                                         />
                                                         <Modal.Footer>
@@ -258,8 +217,8 @@ const NavHome = () => {
                                                                     <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
                                                                 </svg>
                                                             </Button>
-                                                            <Button variant="primary" type="submit">
-                                                                Register
+                                                            <Button variant="primary" type="submit" onClick={handleCloseRegister}>
+                                                                Sign in
                                                             </Button>
                                                         </Modal.Footer>
                                                     </Form>
