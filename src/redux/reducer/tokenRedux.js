@@ -2,7 +2,7 @@ import { TOKEN_QUERY } from "../action";
 
 
 const initialState = {
-    content : ''
+    content : null
 }
 
 

@@ -19,8 +19,8 @@ export const getRegister = (dataSendRegister, setSingOut) => {
                 console.log(dataSendRegister);
                 console.log(data);
             if (response.ok) {
-              //  dispatch({ type: PRIVATE_PROFILE, payload: data })
-              //  setSingOut(true)
+                dispatch({ type: PRIVATE_PROFILE, payload: data })
+                setSingOut(true)
                 console.log('registrazione effetuata con successo')
             }
         } catch (error) {
@@ -44,8 +44,33 @@ export const getLogin = (dataSendLogin, setSingOut) => {
                 console.log(dataSendLogin);
                 console.log(data);
             if (response.ok) {
-              //  dispatch({ type: PRIVATE_PROFILE, payload: data })
-              //  setSingOut(true)
+                dispatch({ type: TOKEN_QUERY, payload: data })
+                setSingOut(true)
+                console.log('login effetuata con successo')
+            }
+        } catch (error) {
+            console.log('error: ' + error)
+        }
+    }
+}
+
+export const getUser = (dataSendLogin, setSingOut, Token) => {
+    return async (dispatch) => {
+        try {
+            const response = await fetch('http://localhost:3001/social&note/users/me', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${Token}`,
+                },
+                body: JSON.stringify(dataSendLogin),
+            });
+            const data = await response.json()
+                console.log(dataSendLogin);
+                console.log(data);
+            if (response.ok) {
+                dispatch({ type: PRIVATE_PROFILE, payload: data })
+                setSingOut(true)
                 console.log('login effetuata con successo')
             }
         } catch (error) {
