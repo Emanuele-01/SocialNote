@@ -4,6 +4,7 @@ import { persistReducer, persistStore } from 'redux-persist';
 import { encryptTransform } from "redux-persist-transform-encrypt";
 import storage from 'redux-persist/lib/storage';
 import privateProfileRedux from "../reducer/privateProfileRedux";
+import singOut from "../reducer/signOut";
 
 const persistConfig = {
     key: 'root',
@@ -16,7 +17,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
 
     token: tokenRedux,
-    profile: privateProfileRedux
+    profile: privateProfileRedux,
+    singout : singOut
 
 });
 

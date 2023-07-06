@@ -1,13 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Col, Container, Dropdown, Form, Modal, Nav, Navbar } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { getLogin, getRegister } from "../redux/action";
+import { useDispatch, useSelector } from "react-redux";
+import { PRIVATE_PROFILE, SING_OUT, TOKEN_QUERY, getLogin, getRegister, getUser } from "../redux/action";
 
 const NavHome = () => {
 
     const dispatch = useDispatch();
-    const [signOut, setSignOut] = useState(false);
-
+    const signOut = useSelector(state => state.singout.content);
 
     const [showLogin, setShowLogin] = useState(false);
     const handleCloseLogin = () => setShowLogin(false);
@@ -45,12 +44,26 @@ const NavHome = () => {
 
     const handleRegister = async (event) => {
         event.preventDefault();
-        dispatch(getRegister(dataSendRegister, setSignOut))
+        dispatch(getRegister(dataSendRegister))
     }
 
     const handleLogin = async (event) => {
         event.preventDefault();
-        dispatch(getLogin(dataSendLogin, setSignOut))
+        dispatch(getLogin(dataSendLogin))
+
+    }
+
+    /*
+
+    const handleGetUser = async (event) => {
+        event.preventDefault();
+        dispatch(getUser(dataSendRegister, token))
+    }
+*/
+    const singOut = () => {
+        dispatch({ type: PRIVATE_PROFILE, payload: null })
+        dispatch({ type: TOKEN_QUERY, payload: null })
+        dispatch({ type: SING_OUT, payload: false })
     }
     return (
         <Navbar collapseOnSelect expand="md" className="bg-body-tertiary">
@@ -67,7 +80,7 @@ const NavHome = () => {
                             </Dropdown.Toggle>
                             <Dropdown.Menu>
                                 {signOut === true ? (
-                                    <Button variant="dangerous p-0 mt-1 mb-1 ms-2" onClick={() => { window.location.reload() }}>
+                                    <Button variant="dangerous p-0 mt-1 mb-1 ms-2" onClick={singOut}>
                                         Sing Out
                                     </Button>
                                 ) : (

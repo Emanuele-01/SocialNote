@@ -1,3 +1,44 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap');
+
+
+body{
+font-family: 'Roboto', sans-serif;
+}
+
+.container{
+  position: relative;
+}
+
+.image-css{
+  width: 100px;
+  position: absolute;
+  top: 30%;
+  left: 35%;
+  border-radius: 100%;
+}
+
+.title-css{
+  font-weight: 900;
+}
+
+/*-------------------- MEDIA QUERY -----------------------*/
+@media screen and (min-width : 720px) {
+.image-css{
+  width: 120px;
+  top: 30%;
+  left: 20%;
+}
+.container-body{
+  margin-top: 30px;
+}
+}
+
+@media screen and (min-width : 1200px) {
+.image-css{
+  top: 25%;
+  width: 150px;
+}
+.container-body{
+  margin-top: 100px;
+}
 }
