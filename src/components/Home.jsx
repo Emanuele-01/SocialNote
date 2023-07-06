@@ -1,5 +1,6 @@
 import { Col, Row } from "react-bootstrap";
 import NavHome from "./NavHome";
+import NavAction from "./NavAction";
 
 const Home = () => {
 
@@ -10,8 +11,8 @@ const Home = () => {
                 <NavHome />
             </Col>
 
-            <Col xs={12}>
-
+            <Col xs={12} className="navAction-css">
+                <NavAction />
             </Col>
 
         </Row>
