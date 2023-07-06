@@ -46,7 +46,6 @@ export const getLogin = (dataSendLogin) => {
                 console.log(data);
             if (response.ok) {
                 dispatch({ type: TOKEN_QUERY, payload: data })
-                dispatch({type: SING_OUT, payload: true})
                 console.log('login effetuata con successo')
             }
             const responseUser = await fetch('http://localhost:3001/social&note/users/me', {
@@ -56,10 +55,10 @@ export const getLogin = (dataSendLogin) => {
                 },
             });
             const dataUser = await responseUser.json()
-                console.log(dataUser);
+            console.log(dataUser);
             if (responseUser.ok) {
                 dispatch({ type: PRIVATE_PROFILE, payload: dataUser })
-                console.log('login effetuata con successo')
+                dispatch({type: SING_OUT, payload: true})
             }
         } catch (error) {
             console.log('error: ' + error)
