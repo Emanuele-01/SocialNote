@@ -1,11 +1,19 @@
 import { useState } from "react";
 import { Button, Form, Modal, Nav, Navbar } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
 const NavAction = () => {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const signOut = useSelector(state => state.singout.content);
+    const profile = useSelector(state => state.profile.content);
+
+    const [title, setTitle] = useState('');
+    const [bodyText, setBodyText] = useState('');
+
 
     const localDatePost = () => {
         let date = new Date();
@@ -16,7 +24,28 @@ const NavAction = () => {
         return finalDate;
     };
 
-    const dataPostSend = {};
+    const getPostLocation = () => {
+        let fetchLocation;
+
+        navigator.geolocation.getCurrentPosition(async (position) => {
+            const { latitude, longidude } = position.coords;
+
+            const url = `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longidude}`
+
+            fetchLocation = await fetch(url).then(response => { response.json() }).catch('error fetch');
+
+        })
+
+        return fetchLocation.town;
+    };
+
+    const dataPostSend = {
+        title: title,
+        bodyText: bodyText,
+        publicationDate: localDatePost(),
+        city: getPostLocation(),
+        user: profile.id
+    };
 
 
     return (
@@ -39,26 +68,39 @@ const NavAction = () => {
                                 <Modal.Title>New Post</Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
-                                <Form>
-                                    <Form.Group className="mb-3">
-                                        <Form.Label>Title</Form.Label>
-                                        <Form.Control
-                                            type="text"
-                                            placeholder="Title"
-                                            autoFocus
-                                        />
-                                    </Form.Group>
-                                    <Form.Group
-                                        className="mb-3"
-                                        controlId="exampleForm.ControlTextarea1"
-                                    >
-                                        <Form.Label>Write here your thoughts...</Form.Label>
-                                        <Form.Control
-                                            as="textarea"
-                                            rows={10}
-                                            placeholder="Body Text..." />
-                                    </Form.Group>
-                                </Form>
+                                {
+                                    signOut === true ? (
+                                        <Form>
+                                            <Form.Group className="mb-3">
+                                                <Form.Label>Title</Form.Label>
+                                                <Form.Control
+                                                    type="text"
+                                                    value={dataPostSend.title}
+                                                    placeholder="Title"
+                                                    onChange={e => { setTitle(e.target.value) }}
+                                                    autoFocus
+                                                />
+                                            </Form.Group>
+                                            <Form.Group
+                                                className="mb-3"
+                                                controlId="exampleForm.ControlTextarea1"
+                                            >
+                                                <Form.Label>Write here your thoughts...</Form.Label>
+                                                <Form.Control
+                                                    as="textarea"
+                                                    rows={10}
+                                                    placeholder="Body Text..."
+                                                    value={dataPostSend.bodyText}
+                                                    onChange={e => { setBodyText(e.target.value) }}
+                                                />
+                                            </Form.Group>
+                                        </Form>
+                                    ) : (
+                                        <p>
+                                            Please login or register first before writing a post
+                                        </p>
+                                    )
+                                }
                             </Modal.Body>
                             <Modal.Footer>
                                 <Button variant="dark-outline border border-1 ps-5 pe-5 me-3" onClick={handleClose}>
