@@ -38,15 +38,14 @@ const NavAction = () => {
 
         })
 
-        return fetchLocation.town;
+        return fetchLocation;
     };
+
 
     const dataPostSend = {
         title: title,
         bodyText: bodyText,
-        publicationDate: localDatePost(),
-        city: getPostLocation(),
-        user: profile.id
+        user: profile
     };
 
     const handlePost = (event) => {
