@@ -92,25 +92,3 @@ export const getPost = (dataSendPost) => {
         }
     }
 }
-
-export const getAllPost = () => {
-    return async (dispatch) => {
-        try {
-            const response = await fetch('http://localhost:3001/social&note/post', {
-                method: 'GET',
-                headers: {
-                    Authorization: `Bearer ${token}`
-                },
-            })
-
-            const data = await response.json();
-
-            if (response.ok) {
-                console.log('fetch fatta con successo');
-                dispatch({ type: GET_ALL_POST, payload: data })
-            }
-        } catch (error) {
-            console.log('error: ' + error)
-        }
-    }
-}

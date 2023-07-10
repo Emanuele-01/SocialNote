@@ -25,6 +25,22 @@ font-family: 'Roboto', sans-serif;
   position: fixed;
   bottom: 0;
   width: 100%;
+  z-index: 1;
+}
+
+.navHome-css{
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: 1;
+}
+
+.card-css{
+  margin-top: 80px;
+}
+
+.textBold{
+    font-weight: 900;
 }
 
 /*-------------------- MEDIA QUERY -----------------------*/

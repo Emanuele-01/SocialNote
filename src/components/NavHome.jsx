@@ -58,7 +58,7 @@ const NavHome = () => {
         dispatch({ type: SING_OUT, payload: false })
     }
     return (
-        <Navbar collapseOnSelect expand="md" className="bg-body-tertiary">
+        <Navbar collapseOnSelect expand="md" className="bg-body-tertiary navHome-css">
             <Container>
                 <Navbar.Brand href="#home">SocialNote</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
