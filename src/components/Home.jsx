@@ -25,7 +25,6 @@ const Home = () => {
 
                 if (response.ok) {
                     console.log(data);
-                    console.log('fetch fatta con successo');
                     setAllPost(data);
                 }
             } catch (error) {
@@ -49,17 +48,17 @@ const Home = () => {
                     <Card className="text-center mb-5" key={post.id}>
                         <Card.Header>{post.user.name}</Card.Header>
                         <Card.Body>
-                            <Card.Title>Special title treatment</Card.Title>
+                            <Card.Title>{post.title}</Card.Title>
                             <Card.Text>
-                                With supporting text below as a natural lead-in to additional content.
+                                {post.bodyText}
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer className="text-muted d-flex justify-content-around p-0">
                             <Card.Text className="mt-3 textBold">
-                                2-10-1-2023
+                                {post.publicationDate}
                             </Card.Text>
                             <Card.Text className="mt-3 textBold">
-                                Roma
+                                {post.city}
                             </Card.Text>
                         </Card.Footer>
                     </Card>
