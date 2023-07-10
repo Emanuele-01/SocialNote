@@ -1,10 +1,12 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import tokenRedux from "../reducer/tokenRedux";
 import { persistReducer, persistStore } from 'redux-persist';
 import { encryptTransform } from "redux-persist-transform-encrypt";
 import storage from 'redux-persist/lib/storage';
+import tokenRedux from "../reducer/tokenRedux";
 import privateProfileRedux from "../reducer/privateProfileRedux";
 import singOut from "../reducer/signOut";
+import postUser from "../reducer/postUser";
+import { getAllPost } from "../action";
 
 const persistConfig = {
     key: 'root',
@@ -18,6 +20,8 @@ const rootReducer = combineReducers({
 
     token: tokenRedux,
     profile: privateProfileRedux,
+    post: postUser,
+    allPost: getAllPost,
     singout : singOut
 
 });

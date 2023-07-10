@@ -1,6 +1,8 @@
 export const TOKEN_QUERY = 'TOKEN_QUERY';
 export const PRIVATE_PROFILE = 'PRIVATE_PROFILE';
 export const SING_OUT = "SING_OUT";
+export const POST_USER = "POST_USER";
+export const GET_ALL_POST = "GET_ALL_POST"
 
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkVtYW51ZWxlIFBpdG9uaSIsImlhdCI6MTUxNjIzOTAyMn0.ywBYEeT3Pm9ikR0tWtSlhDBnsTWKIRCn8V_7ww8eg9o'
 
@@ -59,6 +61,53 @@ export const getLogin = (dataSendLogin) => {
             if (responseUser.ok) {
                 dispatch({ type: PRIVATE_PROFILE, payload: dataUser })
                 dispatch({type: SING_OUT, payload: true})
+            }
+        } catch (error) {
+            console.log('error: ' + error)
+        }
+    }
+}
+
+
+export const getPost = (dataSendPost) => {
+    return async (dispatch) => {
+        try {
+            const response = await fetch('http://localhost:3001/social&note/post', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify(dataSendPost),
+            })
+            const data = await response.json()
+
+            if (response.ok) {
+                console.log('fetch fatta con successo');
+                dispatch({ type: POST_USER, payload: data })
+            }
+
+        } catch (error) {
+            console.log('error: ' + error)
+        }
+    }
+}
+
+export const getAllPost = () => {
+    return async (dispatch) => {
+        try {
+            const response = await fetch('http://localhost:3001/social&note/post', {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+            })
+
+            const data = await response.json();
+
+            if (response.ok) {
+                console.log('fetch fatta con successo');
+                dispatch({ type: GET_ALL_POST, payload: data })
             }
         } catch (error) {
             console.log('error: ' + error)

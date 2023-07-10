@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Dropdown, Form, Modal, Nav, Navbar } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { PRIVATE_PROFILE, SING_OUT, TOKEN_QUERY, getLogin, getRegister, getUser } from "../redux/action";
+import { POST_USER, PRIVATE_PROFILE, SING_OUT, TOKEN_QUERY, getLogin, getRegister, getUser } from "../redux/action";
 
 const NavHome = () => {
 
@@ -50,19 +50,11 @@ const NavHome = () => {
     const handleLogin = async (event) => {
         event.preventDefault();
         dispatch(getLogin(dataSendLogin))
-
     }
-
-    /*
-
-    const handleGetUser = async (event) => {
-        event.preventDefault();
-        dispatch(getUser(dataSendRegister, token))
-    }
-*/
     const singOut = () => {
-        dispatch({ type: PRIVATE_PROFILE, payload: null })
         dispatch({ type: TOKEN_QUERY, payload: null })
+        dispatch({ type: PRIVATE_PROFILE, payload: null })
+        dispatch({ type: POST_USER, payload: null })
         dispatch({ type: SING_OUT, payload: false })
     }
     return (

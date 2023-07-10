@@ -11,6 +11,10 @@ const Home = () => {
                 <NavHome />
             </Col>
 
+            <Col xs={10}>
+
+            </Col>
+
             <Col xs={12}>
                 <NavAction />
             </Col>
