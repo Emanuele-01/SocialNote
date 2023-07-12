@@ -52,9 +52,9 @@ const NavHome = () => {
         dispatch(getLogin(dataSendLogin))
     }
     const singOut = () => {
-        dispatch({ type: TOKEN_QUERY, payload: null })
-        dispatch({ type: PRIVATE_PROFILE, payload: null })
-        dispatch({ type: POST_USER, payload: null })
+        dispatch({ type: TOKEN_QUERY, payload: {} })
+        dispatch({ type: PRIVATE_PROFILE, payload: {} })
+        dispatch({ type: POST_USER, payload: {} })
         dispatch({ type: SING_OUT, payload: false })
     }
     return (

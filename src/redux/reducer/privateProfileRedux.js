@@ -2,7 +2,7 @@ import { PRIVATE_PROFILE} from "../action";
 
 
 const initialState = {
-    content : null
+    content : {}
 }
 
 

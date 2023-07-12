@@ -55,7 +55,7 @@ const NavAction = () => {
         title: title,
         bodyText: bodyText,
         city: position,
-        user: profile
+        user: profile.id
     };
 
     const handlePost = (event) => {
