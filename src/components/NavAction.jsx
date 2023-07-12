@@ -17,22 +17,13 @@ const NavAction = () => {
     const [title, setTitle] = useState('');
     const [bodyText, setBodyText] = useState('');
 
-
-    const localDatePost = () => {
-        let date = new Date();
-        let day = date.getDate();
-        let month = date.getMonth() + 1;
-        let year = date.getFullYear();
-        let finalDate = year.toString() + '-' + month.toString() + '-' + day.toString();
-        return finalDate;
-    };
-
     const getPostLocation = async () => {
 
         navigator.geolocation.getCurrentPosition(async (position) => {
-            const { latitude, longidude } = position.coords;
+            console.log(position);
+            const { latitude, longitude } = position.coords;
 
-            const url = `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longidude}`
+            const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
 
             try {
                 const response = await fetch(url, {
@@ -45,7 +36,7 @@ const NavAction = () => {
                 if (response.ok) {
                     console.log('fetch effetuata con successo')
                     console.log(data);
-                    setPosition(data)
+                    //    setPosition(data)
                 }
             } catch (error) {
                 console.log(error);
@@ -53,6 +44,11 @@ const NavAction = () => {
         })
     };
 
+    useEffect(() => {
+        dispatch(getPostLocation())
+    }, [dispatch])
+
+    console.log(position);
 
     const dataPostSend = {
         title: title,
