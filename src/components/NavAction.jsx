@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Form, Modal, Nav, Navbar } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getPost } from "../redux/action";
@@ -13,38 +13,48 @@ const NavAction = () => {
     const signOut = useSelector(state => state.singout.content);
     const profile = useSelector(state => state.profile.content);
 
+    const [position, setPosition] = useState('')
     const [title, setTitle] = useState('');
     const [bodyText, setBodyText] = useState('');
 
-
-    const localDatePost = () => {
-        let date = new Date();
-        let day = date.getDate();
-        let month = date.getMonth() + 1;
-        let year = date.getFullYear();
-        let finalDate = year.toString() + '-' + month.toString() + '-' + day.toString();
-        return finalDate;
-    };
-
-    const getPostLocation = () => {
-        let fetchLocation;
+    const getPostLocation = async () => {
 
         navigator.geolocation.getCurrentPosition(async (position) => {
-            const { latitude, longidude } = position.coords;
+            console.log(position);
+            const { latitude, longitude } = position.coords;
 
-            const url = `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longidude}`
+            const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
 
-            fetchLocation = await fetch(url).then(response => { response.json() }).catch('error fetch');
+            try {
+                const response = await fetch(url, {
+                    method: 'GET',
+                });
 
+                const { address } = await response.json();
+                console.log(address);
+
+                if (response.ok) {
+                    console.log('fetch effetuata con successo')
+                    console.log(address);
+                    setPosition(address.town)
+                }
+            } catch (error) {
+                console.log(error);
+            }
         })
-
-        return fetchLocation;
     };
 
+    console.log(position);
+
+
+    useEffect(() => {
+        getPostLocation()
+    }, [])
 
     const dataPostSend = {
         title: title,
         bodyText: bodyText,
+        city: position,
         user: profile
     };
 

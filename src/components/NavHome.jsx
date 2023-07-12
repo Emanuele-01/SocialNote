@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button, Col, Container, Dropdown, Form, Modal, Nav, Navbar } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { POST_USER, PRIVATE_PROFILE, SING_OUT, TOKEN_QUERY, getLogin, getRegister, getUser } from "../redux/action";
+import { POST_USER, PRIVATE_PROFILE, SING_OUT, TOKEN_QUERY, getLogin, getRegister } from "../redux/action";
 
 const NavHome = () => {
 
