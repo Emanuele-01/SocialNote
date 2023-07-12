@@ -44,12 +44,13 @@ const NavAction = () => {
         })
     };
 
+
     useEffect(() => {
-        dispatch(getPostLocation())
-    }, [dispatch])
+        getPostLocation()
+    }, [])
+
 
     console.log(position);
-
     const dataPostSend = {
         title: title,
         bodyText: bodyText,
