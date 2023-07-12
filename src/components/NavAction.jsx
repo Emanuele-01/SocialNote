@@ -13,7 +13,7 @@ const NavAction = () => {
     const signOut = useSelector(state => state.singout.content);
     const profile = useSelector(state => state.profile.content);
 
-    const [position, setPosition] = useState({})
+    const [position, setPosition] = useState('')
     const [title, setTitle] = useState('');
     const [bodyText, setBodyText] = useState('');
 
@@ -30,13 +30,13 @@ const NavAction = () => {
                     method: 'GET',
                 });
 
-                const data = await response.json();
-                console.log(data);
+                const { address } = await response.json();
+                console.log(address);
 
                 if (response.ok) {
                     console.log('fetch effetuata con successo')
-                    console.log(data);
-                    //    setPosition(data)
+                    console.log(address);
+                    setPosition(address.town)
                 }
             } catch (error) {
                 console.log(error);
@@ -44,16 +44,17 @@ const NavAction = () => {
         })
     };
 
+    console.log(position);
+
 
     useEffect(() => {
         getPostLocation()
     }, [])
 
-
-    console.log(position);
     const dataPostSend = {
         title: title,
         bodyText: bodyText,
+        city: position,
         user: profile
     };
 
