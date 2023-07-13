@@ -2,16 +2,23 @@ import { Button, Card, Col, Placeholder, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import image1 from "../assets/placeholder.png";
 import image2 from "../assets/google.png";
+import NavHome from "./NavHome";
 
 const Profile = () => {
     const profile = useSelector(state => state.profile.content);
     const signOut = useSelector(state => state.singout.content);
     return (
         <>
+            <Row>
+                <Col xs={12}>
+                    <NavHome />
+                </Col>
+            </Row>
+
             {signOut === true ? (
                 <Row className="justify-content-center">
-                    <Col xs={10} className="mt-4">
-                        <Card className="mt-4 container">
+                    <Col xs={10} className="mt-5">
+                        <Card className="mt-5 container">
                             <Card.Img variant="top" src={image1} alt="ciao" height={"200px"} />
                             <Card.Img variant="top" src={image2} alt="ciao" className="image-css" />
                             <Card.Body className="container-body">

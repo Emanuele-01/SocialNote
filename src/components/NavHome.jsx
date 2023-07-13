@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button, Col, Container, Dropdown, Form, Modal, Nav, Navbar } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { POST_USER, PRIVATE_PROFILE, SING_OUT, TOKEN_QUERY, getLogin, getRegister } from "../redux/action";
+import { Link, useLocation } from "react-router-dom";
 
 const NavHome = () => {
 
@@ -25,6 +26,7 @@ const NavHome = () => {
     const [age, setAge] = useState('')
     const [dayOfBirth, setDayOfBirth] = useState('')
 
+    const location = useLocation();
 
     const dataSendLogin = {
         email: email,
@@ -60,7 +62,12 @@ const NavHome = () => {
     return (
         <Navbar collapseOnSelect expand="md" className="bg-body-tertiary navHome-css">
             <Container>
-                <Navbar.Brand href="#home">SocialNote</Navbar.Brand>
+                <Navbar.Brand href="#home">
+                    <Link className={`${location.pathname === '/home' ? " fs-4 text-dark active fw-bold" : "fs-5 nav-link text-dark"}`} to="/home"> SocialNote</Link>
+                </Navbar.Brand>
+                <Nav.Link >
+                    <Link className={`${location.pathname === '/profile' ? "nav-link fs-4 me-3 text-dark active fw-bold" : "fs-5 me-3 nav-link text-dark"}`} to="/profile"> Profile</Link>
+                </Nav.Link>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
@@ -234,7 +241,6 @@ const NavHome = () => {
                                 }
                             </Dropdown.Menu>
                         </Dropdown>
-                        <Nav.Link href="#features">Profile</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
