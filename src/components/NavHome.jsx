@@ -62,12 +62,10 @@ const NavHome = () => {
     return (
         <Navbar collapseOnSelect expand="md" className="bg-body-tertiary navHome-css">
             <Container>
-                <Navbar.Brand href="#home">
-                    <Link className={`${location.pathname === '/home' ? " fs-4 text-dark active fw-bold" : "fs-5 nav-link text-dark"}`} to="/home"> SocialNote</Link>
+                <Navbar.Brand className="d-flex">
+                    <Link className={`${location.pathname === '/' ? " fs-4 me-3 nav-link text-dark active fw-bold" : "fs-5 nav-link text-dark"}`} to="/"> SocialNote</Link>
+                    <Link className={`${location.pathname === '/profile' ? "fs-4 nav-link ms-3  text-dark active fw-bold" : "fs-5 mt-1 nav-link text-dark"}`} to="/profile"> Profile</Link>
                 </Navbar.Brand>
-                <Nav.Link >
-                    <Link className={`${location.pathname === '/profile' ? "nav-link fs-4 me-3 text-dark active fw-bold" : "fs-5 me-3 nav-link text-dark"}`} to="/profile"> Profile</Link>
-                </Nav.Link>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
