@@ -53,7 +53,7 @@ const NavHome = () => {
     }
     const singOut = () => {
         dispatch({ type: TOKEN_QUERY, payload: {} })
-        dispatch({ type: PRIVATE_PROFILE, payload: {} })
+        dispatch({ type: PRIVATE_PROFILE, payload: { id: '' } })
         dispatch({ type: POST_USER, payload: {} })
         dispatch({ type: SING_OUT, payload: false })
     }

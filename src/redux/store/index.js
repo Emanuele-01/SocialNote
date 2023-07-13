@@ -6,7 +6,7 @@ import tokenRedux from "../reducer/tokenRedux";
 import privateProfileRedux from "../reducer/privateProfileRedux";
 import singOut from "../reducer/signOut";
 import postUser from "../reducer/postUser";
-import thunk from 'redux-thunk';
+
 
 
 const persistConfig = {
@@ -29,8 +29,7 @@ const rootReducer = combineReducers({
 const persistedReducer = persistReducer (persistConfig, rootReducer );
 
 export const store = configureStore({
-    reducer: persistedReducer,
-    middleware: [thunk],
+    reducer: persistedReducer
 });
 
 export const persistor = persistStore(store);

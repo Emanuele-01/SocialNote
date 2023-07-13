@@ -69,8 +69,9 @@ export const getLogin = (dataSendLogin) => {
 }
 
 
-export const getPost = (dataSendPost) => {
+export const getPost = (dataPostSend) => {
     return async (dispatch) => {
+        console.log(dataPostSend);
         try {
             const response = await fetch('http://localhost:3001/social&note/post', {
                 method: 'POST',
@@ -78,13 +79,15 @@ export const getPost = (dataSendPost) => {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`
                 },
-                body: JSON.stringify(dataSendPost),
+                body: JSON.stringify(dataPostSend),
             })
             const data = await response.json()
 
             if (response.ok) {
                 console.log('fetch fatta con successo');
                 dispatch({ type: POST_USER, payload: data })
+            } else {
+                console.log("errore");
             }
 
         } catch (error) {
