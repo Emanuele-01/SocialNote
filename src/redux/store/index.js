@@ -1,4 +1,4 @@
-import { MiddlewareArray, combineReducers, configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from 'redux-persist';
 import { encryptTransform } from "redux-persist-transform-encrypt";
 import storage from 'redux-persist/lib/storage';
