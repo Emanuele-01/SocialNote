@@ -116,3 +116,25 @@ export const deletePost = (idPost, authUserToken) => {
         }
     }
 }
+
+export const updatePost = (idPost, authUserToken) => {
+    return async () => {
+        console.log(idPost);
+        try {
+            const response = await fetch(`http://localhost:3001/social&note/post/${idPost}`, {
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${authUserToken}`
+                },
+                
+            })
+            const data = await response.json()
+
+            if (response.ok) {
+                console.log('fetch fatta con successo');
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
