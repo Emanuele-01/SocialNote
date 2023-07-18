@@ -9,16 +9,19 @@ font-family: 'Roboto', sans-serif;
   position: relative;
 }
 
-.image-css{
-  width: 100px;
-  position: absolute;
-  top: 30%;
-  left: 35%;
-  border-radius: 100%;
-}
-
 .title-css{
   font-weight: 900;
+}
+
+.imgProfile-css{
+  width: 150px;
+  height: 150px;
+}
+
+.containerImg-css{
+  display: flex;
+  justify-content: center;
+  margin-top: 150px;
 }
 
 .navAction-css{
@@ -45,21 +48,12 @@ font-family: 'Roboto', sans-serif;
 
 /*-------------------- MEDIA QUERY -----------------------*/
 @media screen and (min-width : 720px) {
-.image-css{
-  width: 120px;
-  top: 30%;
-  left: 20%;
-}
 .container-body{
   margin-top: 30px;
 }
 }
 
 @media screen and (min-width : 1200px) {
-.image-css{
-  top: 25%;
-  width: 150px;
-}
 .container-body{
   margin-top: 100px;
 }
