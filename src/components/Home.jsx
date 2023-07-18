@@ -94,7 +94,6 @@ const Home = () => {
                             </Card.Text>
                         </Card.Footer>
                     </Card>
-
                 )}
             </Col>
 
