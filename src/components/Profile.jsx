@@ -23,7 +23,7 @@ const Profile = () => {
                             </Container>
                             <Card.Body className="container-body">
                                 <Container>
-                                    <Row className="justify-content-center mb-4 mt-5">
+                                    <Row className="justify-content-center">
                                         <Col xs={4}>
                                             <Card.Title className="text-center  mt-3">Name:</Card.Title>
                                         </Col>
@@ -33,7 +33,7 @@ const Profile = () => {
                                     </Row>
                                 </Container>
                                 <Container>
-                                    <Row className="justify-content-center mb-4 mt-5">
+                                    <Row className="justify-content-center">
                                         <Col xs={4}>
                                             <Card.Title className="text-center  mt-3">Lastname:</Card.Title>
                                         </Col>
