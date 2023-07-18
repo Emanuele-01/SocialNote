@@ -1,6 +1,5 @@
 import { Button, Card, Col, Placeholder, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import image1 from "../assets/placeholder.png";
 import image2 from "../assets/google.png";
 import NavHome from "./NavHome";
 
@@ -19,7 +18,6 @@ const Profile = () => {
                 <Row className="justify-content-center">
                     <Col xs={10} className="mt-5">
                         <Card className="mt-5 container">
-                            <Card.Img variant="top" src={image1} alt="ciao" height={"200px"} />
                             <Card.Img variant="top" src={image2} alt="ciao" className="image-css" />
                             <Card.Body className="container-body">
                                 <Row className="justify-content-center mb-4 mt-5">
@@ -67,7 +65,6 @@ const Profile = () => {
                 <Row className="justify-content-center">
                     <Col xs={10} className="mt-4">
                         <Card>
-                            <Card.Img variant="top" src={image1} height={"500px"} />
                             <Card.Body>
                                 <Placeholder as={Card.Title} animation="glow" className="mb-5">
                                     <Placeholder xs={8} />
