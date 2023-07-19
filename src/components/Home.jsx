@@ -52,15 +52,15 @@ const Home = () => {
 
             <Col xs={10} className="card-css">
                 {allPost && allPost.content && allPost.content.map((post) =>
-                    <Card className="text-center mb-5" key={post.id}>
+                    <Card className="text-center mb-5 cardHome-css" key={post.id}>
                         <Card.Header className="d-flex justify-content-between">
-                            <Card.Text className="mt-2 fs-6">
-                                {post.user.name}
+                            <Card.Text className="mt-2 fs-6 title-css">
+                                {post.user.username}
                             </Card.Text>
-                            <Card.Text>
+                            <Card.Text className="mt-2">
                                 <DropdownButton
                                     align="end"
-                                    variant="dark-outline pt-0 pb-0 ps-3 pe-3 mt-1"
+                                    variant="dark-outline pt-0 pb-0 ps-3 pe-3"
                                     title=''
                                     id="dropdown-menu-align-end"
                                     className=""
@@ -80,7 +80,7 @@ const Home = () => {
                             </Card.Text>
                         </Card.Header>
                         <Card.Body>
-                            <Card.Title>{post.title}</Card.Title>
+                            <Card.Title className="title-css fs-4">{post.title}</Card.Title>
                             <Card.Text>
                                 {post.bodyText}
                             </Card.Text>
