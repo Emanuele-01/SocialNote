@@ -18,9 +18,7 @@ const Profile = () => {
                 <Row className="justify-content-center">
                     <Col xs={10} className="mt-5">
                         <Card className="mt-5 container">
-                            <Container className="containerImg-css">
-                                <Card.Img variant="top" src={image2} alt="ciao" className="imgProfile-css" />
-                            </Container>
+                            <Card.Img variant="top" src={image2} alt="ciao" className="image-css" />
                             <Card.Body className="container-body">
                                 <Container>
                                     <Row className="justify-content-center">
@@ -60,9 +58,6 @@ const Profile = () => {
                 <Row className="justify-content-center">
                     <Col xs={10} className="mt-4">
                         <Card>
-                            <Container className="containerImg-css">
-                                <Card.Img variant="top" src={image2} alt="ciao" className="imgProfile-css" />
-                            </Container>
                             <Card.Body>
                                 <Placeholder as={Card.Title} animation="glow" className="mb-5">
                                     <Placeholder xs={8} />
@@ -73,9 +68,9 @@ const Profile = () => {
                                     <Placeholder xs={10} />
                                 </Placeholder>
                             </Card.Body>
-                        </Card>
-                    </Col>
-                </Row>
+                        </Card >
+                    </Col >
+                </Row >
             )
 
             }
