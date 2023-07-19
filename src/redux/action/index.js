@@ -1,3 +1,5 @@
+import { loginSuccess } from "../reducer/logReducer";
+
 export const TOKEN_QUERY = 'TOKEN_QUERY';
 export const PRIVATE_PROFILE = 'PRIVATE_PROFILE';
 export const SING_OUT = "SING_OUT";
@@ -60,7 +62,8 @@ export const getLogin = (dataSendLogin) => {
             console.log(dataUser);
             if (responseUser.ok) {
                 dispatch({ type: PRIVATE_PROFILE, payload: dataUser })
-                dispatch({type: SING_OUT, payload: true})
+                dispatch({ type: SING_OUT, payload: true })
+                dispatch(loginSuccess())
             }
         } catch (error) {
             console.log('error: ' + error)
@@ -124,7 +127,6 @@ export const updatePost = (idPost, authUserToken) => {
                 headers: {
                     Authorization: `Bearer ${authUserToken}`
                 },
-                
             })
             if (response.ok) {
                 console.log('fetch fatta con successo');

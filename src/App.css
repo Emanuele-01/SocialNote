@@ -11,6 +11,12 @@ font-family: 'Roboto', sans-serif;
 
 .title-css{
   font-weight: 900;
+  color: #050505;
+}
+
+.paragraph-css{
+  font-weight: 900;
+  color: #3B3B3B;
 }
 
 .imgProfile-css{
@@ -38,6 +44,11 @@ font-family: 'Roboto', sans-serif;
   top: 0px;
   width: 100%;
   z-index: 1;
+}
+
+.containerLogin-css{
+  background-color: #9A8174;
+  border-radius: 10px;
 }
 
 .card-css{
