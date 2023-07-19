@@ -106,8 +106,6 @@ export const deletePost = (idPost, authUserToken) => {
                     Authorization: `Bearer ${authUserToken}`
                 }
             })
-            const data = await response.json()
-
             if (response.ok) {
                 console.log('fetch fatta con successo');
             }
@@ -128,8 +126,6 @@ export const updatePost = (idPost, authUserToken) => {
                 },
                 
             })
-            const data = await response.json()
-
             if (response.ok) {
                 console.log('fetch fatta con successo');
             }

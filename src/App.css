@@ -52,6 +52,15 @@ font-family: 'Roboto', sans-serif;
     font-weight: 900;
 }
 
+.image-css{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  width: 100px;
+  height: 100px;
+}
+
 /*-------------------- MEDIA QUERY -----------------------*/
 @media screen and (min-width : 720px) {
 .container-body{

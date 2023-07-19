@@ -18,7 +18,9 @@ const Profile = () => {
                 <Row className="justify-content-center">
                     <Col xs={10} className="mt-5">
                         <Card className="mt-5 container">
-                            <Card.Img variant="top" src={image2} alt="ciao" className="image-css" />
+                            <Container className="image-css">
+                                <Card.Img variant="top" src={image2} alt="ciao" />
+                            </Container>
                             <Card.Body className="container-body">
                                 <Container>
                                     <Row className="justify-content-center">
