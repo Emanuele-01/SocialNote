@@ -53,7 +53,7 @@ const Home = () => {
             <Col xs={10} className="card-css">
                 {allPost && allPost.content && allPost.content.map((post) =>
                     <Card className="text-center mb-5 cardHome-css" key={post.id}>
-                        <Card.Header className="d-flex justify-content-between">
+                        <Card.Header className="d-flex justify-content-between cardHeader">
                             <Card.Text className="mt-2 fs-6 title-css">
                                 {post.user.username}
                             </Card.Text>
@@ -63,28 +63,26 @@ const Home = () => {
                                     variant="dark-outline pt-0 pb-0 ps-3 pe-3"
                                     title=''
                                     id="dropdown-menu-align-end"
-                                    className=""
                                 >
                                     <Dropdown.Item eventKey="1" className="ps-5" onClick={() => handleDeletePost(post.id)}>
                                         {<svg xmlns="http://www.w3.org/2000/svg" className="me-3 mb-1" width="18" height="18" fill="#c80d0d" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                             <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
                                         </svg>} Delete
                                     </Dropdown.Item>
-                                    <Dropdown.Divider />
                                 </DropdownButton>
                             </Card.Text>
                         </Card.Header>
-                        <Card.Body>
+                        <Card.Body className="cardBody">
                             <Card.Title className="title-css fs-4">{post.title}</Card.Title>
-                            <Card.Text>
+                            <Card.Text className="paragraphHome-css">
                                 {post.bodyText}
                             </Card.Text>
                         </Card.Body>
-                        <Card.Footer className="text-muted d-flex justify-content-around p-0">
-                            <Card.Text className="mt-3 textBold">
+                        <Card.Footer className="text-muted d-flex justify-content-around p-0 cardFooter">
+                            <Card.Text className="mt-3 paragraph-css">
                                 {post.publicationDate}
                             </Card.Text>
-                            <Card.Text className="mt-3 textBold">
+                            <Card.Text className="mt-3 paragraph-css">
                                 {post.city}
                             </Card.Text>
                         </Card.Footer>
