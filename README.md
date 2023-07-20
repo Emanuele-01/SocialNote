@@ -19,6 +19,6 @@
 
  - Frontend: HTML, CSS, JAVASCRIPT, REACT, BOOTSTRAP.
  
- - Backend: JAVA, SPRING.
+ - Backend: JAVA, SPRING. (Link Github Backend: https://github.com/Emanuele-01/SocialNote-be)
  
  - DataBase: PostgreSQL.
