@@ -2,11 +2,15 @@ import { useState } from "react";
 import { Button, Col, Container, Dropdown, Form, Modal, Nav, Navbar } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { POST_USER, PRIVATE_PROFILE, SING_OUT, TOKEN_QUERY, getLogin, getRegister } from "../redux/action";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { logout } from "../redux/reducer/logReducer";
 
 const NavHome = () => {
 
     const dispatch = useDispatch();
+    const navigated = useNavigate();
+
+
     const signOut = useSelector(state => state.singout.content);
 
     const [showLogin, setShowLogin] = useState(false);
@@ -58,6 +62,8 @@ const NavHome = () => {
         dispatch({ type: PRIVATE_PROFILE, payload: { id: '' } })
         dispatch({ type: POST_USER, payload: {} })
         dispatch({ type: SING_OUT, payload: false })
+        dispatch(logout())
+        navigated('/')
     }
     return (
         <Navbar collapseOnSelect expand="md" className="bg-body-tertiary navHome-css">

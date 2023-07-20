@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Button, Card, Col, Container, Form, Modal, Row } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { getRegister } from "../redux/action";
+import { getLogin, getRegister } from "../redux/action";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
     const dispatch = useDispatch();
+    const navigated = useNavigate();
 
     const [showRegister, setShowRegister] = useState(false);
     const handleCloseRegister = () => setShowRegister(false);
@@ -19,6 +21,11 @@ const LoginPage = () => {
     const [age, setAge] = useState('')
     const [dayOfBirth, setDayOfBirth] = useState('')
 
+    const dataSendLogin = {
+        email: email,
+        password: password
+    }
+
     const dataSendRegister = {
         name: name,
         lastName: lastName,
@@ -30,9 +37,14 @@ const LoginPage = () => {
         dayOfHiding: dayOfBirth
     }
 
+    const handleLogin = async (event) => {
+        event.preventDefault();
+        dispatch(getLogin(dataSendLogin, navigated))
+    }
+
     const handleRegister = async (event) => {
         event.preventDefault();
-        dispatch(getRegister(dataSendRegister))
+        dispatch(getRegister(dataSendRegister, navigated))
     }
 
     return (
@@ -49,7 +61,7 @@ const LoginPage = () => {
                                 <Card.Title className="text-center fs-2 mb-4 paragraph-css">Login</Card.Title>
                                 <Row className="justify-content-center mb-4">
                                     <Col xs={8}>
-                                        <Form>
+                                        <Form onSubmit={handleLogin}>
                                             <Form.Group className="text-center" controlId="exampleForm.ControlInput1">
                                                 <Form.Label className="fs-5 mb-3 text-center paragraph-css">Email address</Form.Label>
                                                 <Form.Control
@@ -57,6 +69,8 @@ const LoginPage = () => {
                                                     placeholder="es: name@example.com"
                                                     className="mb-4"
                                                     autoFocus
+                                                    onChange={e => { setEmail(e.target.value) }}
+                                                    value={dataSendLogin.email}
                                                     size="md"
                                                 />
                                                 <div className="border border-1 border-black mb-3"></div>
@@ -65,11 +79,13 @@ const LoginPage = () => {
                                                     type="password"
                                                     placeholder="your password"
                                                     autoFocus
+                                                    onChange={e => { setPassword(e.target.value) }}
+                                                    value={dataSendLogin.password}
                                                     size="md"
                                                 />
                                             </Form.Group>
                                             <div className="d-flex justify-content-end">
-                                                <Button className="p-2 mt-3" variant="dark">
+                                                <Button className="p-2 mt-3" variant="dark" type="submit">
                                                     Login
                                                 </Button>
                                             </div>
@@ -81,7 +97,7 @@ const LoginPage = () => {
                                 <Row className="justify-content-center">
                                     <Col xs={3} className="text-center">
                                         <div className="border border-1 border-black mb-2"></div>
-                                        <Button variant="dark p-2 mt-1 mb-1 " onClick={handleShowRegister}>
+                                        <Button variant="dark p-2 mt-1 mb-1 " onClick={handleShowRegister} >
                                             Register
                                         </Button>
                                     </Col>
