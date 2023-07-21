@@ -21,22 +21,14 @@ const NavAction = () => {
     const getPostLocation = async () => {
 
         navigator.geolocation.getCurrentPosition(async (position) => {
-            console.log(position);
             const { latitude, longitude } = position.coords;
-
             const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
-
             try {
                 const response = await fetch(url, {
                     method: 'GET',
                 });
-
                 const { address } = await response.json();
-                console.log(address);
-
                 if (response.ok) {
-                    console.log('fetch effetuata con successo')
-                    console.log(address);
                     setPosition(address.town)
                 }
             } catch (error) {
@@ -44,9 +36,6 @@ const NavAction = () => {
             }
         })
     };
-
-    console.log(position);
-
 
     useEffect(() => {
         getPostLocation()

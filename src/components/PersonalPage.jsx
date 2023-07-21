@@ -14,6 +14,7 @@ const PersoanlPage = () => {
 
                 <Col xs={10} className="card-css">
                     <Container className="containerProfile-css p-5  mt-5">
+                        <h1 className="title-css">- Emanuele Pitoni</h1>
                         <Card className="mt-5 ">
                             <Container className="image-css">
                                 <Card.Img className="personalImg" src={image} alt="personal image" />

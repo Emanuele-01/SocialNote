@@ -29,7 +29,6 @@ export const getRegister = (dataSendRegister, navigated) => {
                 dispatch({ type: SING_OUT, payload: true })
                 dispatch(loginSuccess())
                 navigated('/home')
-                console.log('registrazione effetuata con successo')
             }
         } catch (error) {
             console.log('error: ' + error)
@@ -53,7 +52,6 @@ export const getLogin = (dataSendLogin, navigated) => {
                 console.log(data);
             if (response.ok) {
                 dispatch({ type: TOKEN_QUERY, payload: data })
-                console.log('login effetuata con successo')
             }
             const responseUser = await fetch('http://localhost:3001/social&note/users/me', {
                 method: 'GET',
@@ -89,14 +87,11 @@ export const getPost = (dataPostSend) => {
                 body: JSON.stringify(dataPostSend),
             })
             const data = await response.json()
-
             if (response.ok) {
-                console.log('fetch fatta con successo');
                 dispatch({ type: POST_USER, payload: data })
             } else {
                 console.log("errore");
             }
-
         } catch (error) {
             console.log('error: ' + error)
         }

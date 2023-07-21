@@ -1,6 +1,6 @@
 import { Card, Col, Container, Placeholder, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import image2 from "../assets/SN-Logo.png";
+import image from "../assets/SN-Logo.png";
 import NavHome from "./NavHome";
 
 const Profile = () => {
@@ -20,7 +20,7 @@ const Profile = () => {
                         <Container className="containerProfile-css p-5  mt-5">
                             <Card className="mt-5 container">
                                 <Container className="image-css">
-                                    <Card.Img src={image2} alt="SocialNote brand-logo" />
+                                    <Card.Img src={image} alt="SocialNote brand-logo" />
                                 </Container>
                                 <Card.Body className="container-body">
                                     <Container>
