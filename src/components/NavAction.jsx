@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, Form, Modal, Nav, Navbar } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getPost } from "../redux/action";
+import { Link } from "react-router-dom";
 
 const NavAction = () => {
     const dispatch = useDispatch();
@@ -143,7 +144,7 @@ const NavAction = () => {
                         </Modal>
                     </Nav.Item>
                     <Nav.Item className="mt-1 fs-5">
-                        <Nav.Link>Link</Nav.Link>
+                        <Link className="nav-link text-active" to="/personalPage">About Me</Link>
                     </Nav.Item>
                 </Nav>
             </Navbar>
