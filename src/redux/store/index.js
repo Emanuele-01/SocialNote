@@ -6,6 +6,7 @@ import tokenRedux from "../reducer/tokenRedux";
 import privateProfileRedux from "../reducer/privateProfileRedux";
 import singOut from "../reducer/signOut";
 import postUser from "../reducer/postUser";
+import logReducer from "../reducer/logReducer";
 
 
 
@@ -22,8 +23,8 @@ const rootReducer = combineReducers({
     token: tokenRedux,
     profile: privateProfileRedux,
     post: postUser,
-    singout : singOut
-
+    singout : singOut,
+    login : logReducer
 });
 
 const persistedReducer = persistReducer (persistConfig, rootReducer );

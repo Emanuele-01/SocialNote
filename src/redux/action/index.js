@@ -1,3 +1,6 @@
+
+import { loginSuccess } from "../reducer/logReducer";
+
 export const TOKEN_QUERY = 'TOKEN_QUERY';
 export const PRIVATE_PROFILE = 'PRIVATE_PROFILE';
 export const SING_OUT = "SING_OUT";
@@ -7,7 +10,7 @@ export const GET_ALL_POST = "GET_ALL_POST"
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkVtYW51ZWxlIFBpdG9uaSIsImlhdCI6MTUxNjIzOTAyMn0.ywBYEeT3Pm9ikR0tWtSlhDBnsTWKIRCn8V_7ww8eg9o'
 
 
-export const getRegister = (dataSendRegister, setSingOut) => {
+export const getRegister = (dataSendRegister, navigated) => {
     return async (dispatch) => {
         try {
             const response = await fetch('http://localhost:3001/auth/register', {
@@ -23,7 +26,9 @@ export const getRegister = (dataSendRegister, setSingOut) => {
                 console.log(data);
             if (response.ok) {
                 dispatch({ type: PRIVATE_PROFILE, payload: data })
-                setSingOut(true)
+                dispatch({ type: SING_OUT, payload: true })
+                dispatch(loginSuccess())
+                navigated('/home')
                 console.log('registrazione effetuata con successo')
             }
         } catch (error) {
@@ -32,7 +37,7 @@ export const getRegister = (dataSendRegister, setSingOut) => {
     }
 }
 
-export const getLogin = (dataSendLogin) => {
+export const getLogin = (dataSendLogin, navigated) => {
     return async (dispatch, getState) => {
         try {
             const response = await fetch('http://localhost:3001/auth/login', {
@@ -60,7 +65,9 @@ export const getLogin = (dataSendLogin) => {
             console.log(dataUser);
             if (responseUser.ok) {
                 dispatch({ type: PRIVATE_PROFILE, payload: dataUser })
-                dispatch({type: SING_OUT, payload: true})
+                dispatch({ type: SING_OUT, payload: true })
+                dispatch(loginSuccess())
+                navigated('/home')
             }
         } catch (error) {
             console.log('error: ' + error)
@@ -124,7 +131,6 @@ export const updatePost = (idPost, authUserToken) => {
                 headers: {
                     Authorization: `Bearer ${authUserToken}`
                 },
-                
             })
             if (response.ok) {
                 console.log('fetch fatta con successo');
