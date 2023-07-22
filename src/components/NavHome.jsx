@@ -1,7 +1,7 @@
 
 import { Button, Container, Dropdown, Nav, Navbar } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { POST_USER, PRIVATE_PROFILE, SING_OUT, TOKEN_QUERY, } from "../redux/action";
+import { POST_USER, PRIVATE_PROFILE, SING_OUT, TOKEN_QUERY } from "../redux/action";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { logout } from "../redux/reducer/logReducer";
 

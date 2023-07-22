@@ -6,6 +6,7 @@ export const PRIVATE_PROFILE = 'PRIVATE_PROFILE';
 export const SING_OUT = "SING_OUT";
 export const POST_USER = "POST_USER";
 export const GET_ALL_POST = "GET_ALL_POST"
+export const LOADING = 'LOADING'
 
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkVtYW51ZWxlIFBpdG9uaSIsImlhdCI6MTUxNjIzOTAyMn0.ywBYEeT3Pm9ikR0tWtSlhDBnsTWKIRCn8V_7ww8eg9o'
 
@@ -39,6 +40,7 @@ export const getRegister = (dataSendRegister, navigated) => {
 export const getLogin = (dataSendLogin, navigated) => {
     return async (dispatch, getState) => {
         try {
+            dispatch({ type: LOADING, payload: true })
             const response = await fetch('http://localhost:3001/auth/login', {
                 method: 'POST',
                 headers: {
@@ -52,6 +54,9 @@ export const getLogin = (dataSendLogin, navigated) => {
                 console.log(data);
             if (response.ok) {
                 dispatch({ type: TOKEN_QUERY, payload: data })
+                dispatch({ type: LOADING, payload: false })
+            }else {
+                dispatch({ type: LOADING, payload: false })
             }
             const responseUser = await fetch('http://localhost:3001/social&note/users/me', {
                 method: 'GET',
@@ -66,6 +71,8 @@ export const getLogin = (dataSendLogin, navigated) => {
                 dispatch({ type: SING_OUT, payload: true })
                 dispatch(loginSuccess())
                 navigated('/home')
+            } else {
+                dispatch({ type: LOADING, payload: false })
             }
         } catch (error) {
             console.log('error: ' + error)

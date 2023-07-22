@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Button, Card, Col, Container, Form, Modal, Row } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { Button, Card, Col, Container, Form, Modal, Row, Spinner } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { getLogin, getRegister } from "../redux/action";
 import { useNavigate } from "react-router-dom";
 
@@ -20,6 +20,8 @@ const LoginPage = () => {
     const [imageProfile, setImageProfile] = useState('')
     const [age, setAge] = useState('')
     const [dayOfBirth, setDayOfBirth] = useState('')
+
+    const loading = useSelector(state => state.loading.content);
 
     const dataSendLogin = {
         email: email,
@@ -44,7 +46,7 @@ const LoginPage = () => {
 
     const handleRegister = async (event) => {
         event.preventDefault();
-        dispatch(getRegister(dataSendRegister, navigated))
+        dispatch(getRegister(dataSendRegister, navigated));
     }
 
     return (
@@ -86,7 +88,11 @@ const LoginPage = () => {
                                             </Form.Group>
                                             <div className="d-flex justify-content-end">
                                                 <Button className="p-2 mt-3" variant="dark" type="submit">
-                                                    Login
+                                                    {loading === true ? (
+                                                        <Spinner className="ms-3 me-3" animation="grow" variant="light" size="sm" />
+                                                    ) : (
+                                                        'Login'
+                                                    )}
                                                 </Button>
                                             </div>
                                         </Form>
@@ -98,7 +104,11 @@ const LoginPage = () => {
                                     <Col xs={3} className="text-center">
                                         <div className="border border-1 border-black mb-2"></div>
                                         <Button variant="dark p-2 mt-1 mb-1 " onClick={handleShowRegister} >
-                                            Register
+                                            {loading === true ? (
+                                                <Spinner className="ms-3 me-3" animation="grow" variant="light" size="sm" />
+                                            ) : (
+                                                'Register'
+                                            )}
                                         </Button>
                                     </Col>
                                 </Row>

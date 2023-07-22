@@ -7,6 +7,7 @@ import privateProfileRedux from "../reducer/privateProfileRedux";
 import singOut from "../reducer/signOut";
 import postUser from "../reducer/postUser";
 import logReducer from "../reducer/logReducer";
+import loading from "../reducer/loading";
 
 
 
@@ -23,7 +24,8 @@ const rootReducer = combineReducers({
     token: tokenRedux,
     profile: privateProfileRedux,
     post: postUser,
-    singout : singOut,
+    singout: singOut,
+    loading: loading,
     login : logReducer
 });
 
